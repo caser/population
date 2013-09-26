@@ -1,17 +1,3 @@
-=begin
-  
-Create a class named CSVReader with an initialize method that takes 
-the name of a file and saves it to an instance variable named @fname. 
-The CSVReader class should also have getter and setter methods for fname.
-
-Headers=
-
-Create a headers= setter method. The headers= method should take a String 
-and then convert the String into an Array. The CSVReader class should create 
-getter and setter methods for headers as well:
-
-=end
-
 #Define CSVReader class
 class CSVReader
 
@@ -34,6 +20,7 @@ class CSVReader
     end
   end
 
+  # Create a hash with the header as key and the array value as value
   def create_hash(values)
     hash = {}
     @headers.each_with_index do |header, index|
