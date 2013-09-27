@@ -16,12 +16,15 @@ class CSVReader
 
     @headers.map! do |word|
       # Strip quotes
-      word.gsub!('"')
+      word.gsub!('"', '')
       # Strip spaces and newlines
       word.strip!
       # Transform string into a snake_case symbol
       word.underscore.to_sym
     end
+
+    # puts "Headers are now: "
+    # p @headers
 
   end
 
@@ -32,10 +35,12 @@ class CSVReader
     hash = {}
 
     @headers.each_with_index do |header, index|
-      value = values[i].strip.gsub('"', '')
+      value = values[index].strip.gsub('"', '')
       hash[header] = value unless value.empty?
     end
 
+    # puts "Hash is: "
+    # p hash
     return hash
 
   end

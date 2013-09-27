@@ -14,27 +14,28 @@ class Analytics
   # Defines a set of options for analytics that the user can run
   def set_options
 
+    @options = []
     @options << { menu_id: 1, menu_title: 'Areas count', method: :how_many }
     @options << { menu_id: 2, menu_title: 'Smallest Population (non 0)', method: :smallest_pop }
     @options << { menu_id: 3, menu_title: 'Largest Population', method: :largest_pop }
-    @options << { menu_id: 4, menu_title: 'How many zips in California?' method: :calfironia_zips}
+    @options << { menu_id: 4, menu_title: 'How many zips in California?', method: :california_zips}
     @options << { menu_id: 5, menu_title: 'Information for a given zip', method: :zip_info }
     @options << { menu_id: 6, menu_title: 'Exit', method: :exit}
 
   end
 
   # Takes a number as an argument and picks the option & associated method
-  def Run(choice)
+  def run(choice)
 
     option = @options.select {|option| option[:menu_id] == choice }.first
 
-    if option.is_nil?
+    if option.nil?
 
       puts "Invalid choice."
 
     elsif option[:method] != :exit
 
-      self.send(option[method:])
+      self.send(option[:method])
       :done
 
     else
@@ -81,7 +82,7 @@ class Analytics
         x.estimated_population <=> y.estimated_population
       end
 
-      smallest = sorted.drop_while { |i| i == 0 }
+      smallest = sorted.drop_while { |i| i.estimated_population == 0 }.first
 
       puts "#{smallest.city}, #{smallest.state} has the smallest population of #{smallest.estimated_population}."
 
@@ -142,3 +143,5 @@ class Analytics
     end
 
   end
+
+end
